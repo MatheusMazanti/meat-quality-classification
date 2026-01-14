@@ -31,7 +31,7 @@ O dataset é composto por imagens organizadas em duas classes:
 - Spoiled (carne estragada)
 
 Devido ao tamanho do conjunto de dados, as imagens não estão incluídas neste repositório. A estrutura esperada é:
-'''
+```
 meat_dataset/
 ├── Fresh/
 │   ├── image_01.jpg
@@ -41,7 +41,7 @@ meat_dataset/
     ├── image_01.jpg
     ├── image_02.jpg
     └── ...
-'''
+```
 ### 3.2 Pré-processamento e Split Estratificado
 As imagens são redimensionadas e normalizadas conforme os requisitos da MobileNetV2. Para evitar viés estatístico, foi utilizada uma divisão estratificada dos dados, garantindo que 20% das amostras de cada classe fossem destinadas ao conjunto de validação.
 
@@ -74,7 +74,7 @@ O modelo final foi avaliado utilizando métricas clássicas de classificação, 
 Os artefatos gerados durante a avaliação estão disponíveis no diretório `results/`.
 
 ## 6. Estrutura do Repositório
-'''
+```
 meat-quality-classification/
 │
 ├── README.md
@@ -102,7 +102,7 @@ meat-quality-classification/
 │
 └── models/
     └── README.md
-'''
+```
 ## 7. Como Reproduzir os Resultados
 
 ### 1. Clonar o repositório:
