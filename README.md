@@ -2,15 +2,15 @@
 
 ## Resumo
 
-Este trabalho apresenta o desenvolvimento de um sistema de classificação automática da qualidade de carnes a partir de imagens digitais, utilizando técnicas de Aprendizado Profundo (Deep Learning). O objetivo é distinguir amostras de carne fresca e estragada por meio de Redes Neurais Convolucionais (CNNs), empregando Transfer Learning com a arquitetura MobileNetV2.
+Este projeto apresenta uma abordagem baseada em Aprendizado de Máquina e Visão Computacional para a classificação automática da qualidade de carnes a partir de imagens digitais. O problema abordado consiste em distinguir amostras de carne fresca (Fresh) e estragada (Spoiled), utilizando Redes Neurais Convolucionais (CNNs) com a técnica de Transfer Learning.
 
-O pipeline proposto contempla desde o pré-processamento dos dados, divisão estratificada do dataset e treinamento em duas fases (warm-up e fine-tuning), até a avaliação quantitativa do modelo por meio de métricas clássicas de classificação. Os resultados demonstram que a abordagem adotada é eficaz, alcançando alta acurácia e boa capacidade de generalização.
+Foi empregada a arquitetura MobileNetV2, previamente treinada no conjunto ImageNet, combinada com um classificador ajustado ao domínio específico do problema. O estudo contempla desde o pré-processamento dos dados até o ajuste fino do modelo (fine-tuning), com atenção especial à correção de vieses estatísticos por meio de divisão estratificada dos dados. Os resultados experimentais demonstram alta capacidade de generalização, alcançando 97,37% de acurácia no conjunto de validação.
 
 ## 1. Introdução
 
-A avaliação da qualidade de carnes é uma etapa crítica na cadeia produtiva de alimentos, impactando diretamente a segurança alimentar e a saúde do consumidor. Métodos tradicionais de inspeção dependem fortemente da análise humana, estando sujeitos a subjetividade, fadiga e inconsistências.
+A avaliação da qualidade de carnes é um fator crítico na indústria alimentícia, impactando diretamente a segurança do consumidor, a redução de desperdícios e a padronização de processos. Métodos tradicionais baseiam-se majoritariamente em inspeção humana, sujeita a subjetividade, fadiga e variação entre avaliadores.
 
-Com o avanço do Aprendizado de Máquina e, em especial, do Aprendizado Profundo, tornou-se viável automatizar tarefas de classificação visual com alto grau de precisão. Neste contexto, este projeto propõe o uso de Redes Neurais Convolucionais para classificar imagens de carnes em dois estados: fresca (Fresh) e estragada (Spoiled), utilizando imagens como única fonte de informação.
+Com o avanço das técnicas de Aprendizado Profundo, especialmente no campo da visão computacional, tornou-se viável a aplicação de modelos capazes de extrair automaticamente características visuais relevantes a partir de imagens. Nesse contexto, este trabalho propõe o uso de uma CNN com Transfer Learning para automatizar a classificação da qualidade da carne, explorando representações profundas já consolidadas em grandes bases de dados.
 
 ## 2. Objetivos
 
@@ -33,11 +33,13 @@ O dataset é composto por imagens organizadas em duas classes:
 Devido ao tamanho do conjunto de dados, as imagens não estão incluídas neste repositório. A estrutura esperada é:
 meat_dataset/
 ├── Fresh/
-│ ├── image_01.jpg
-│ └── ...
+│   ├── image_01.jpg
+│   ├── image_02.jpg
+│   └── ...
 └── Spoiled/
-├── image_01.jpg
-└── ...
+    ├── image_01.jpg
+    ├── image_02.jpg
+    └── ...
 
 ### 3.2 Pré-processamento e Split Estratificado
 As imagens são redimensionadas e normalizadas conforme os requisitos da MobileNetV2. Para evitar viés estatístico, foi utilizada uma divisão estratificada dos dados, garantindo que 20% das amostras de cada classe fossem destinadas ao conjunto de validação.
@@ -86,7 +88,6 @@ meat-quality-classification/
 │   └── training_experiment.ipynb
 │
 ├── src/
-│   ├── __init__.py
 │   ├── dataset.py
 │   ├── model.py
 │   ├── train.py
@@ -94,8 +95,48 @@ meat-quality-classification/
 │
 ├── results/
 │   ├── confusion_matrix.png
-│   └── training_history.png
+│   ├── training_history.png
+│   ├── classification_report.txt
+│   └── evaluation_metrics.txt
 │
 └── models/
     └── README.md
 
+## 7. Como Reproduzir os Resultados
+
+### 1. Clonar o repositório:
+git clone https://github.com/seu-usuario/meat-quality-classification.git
+cd meat-quality-classification
+
+### 2. Criar ambiente virtual e instalar dependências:
+pip install -r requirements.txt
+
+### 3. Organizar o dataset conforme descrito.
+
+### 4. Executar o treinamento:
+python src/train.py
+
+### 5. Avaliar o modelo:
+python src/evaluate.py
+
+
+## 8. Limitações e Trabalhos Futuros
+
+Apesar dos resultados promissores, o projeto apresenta algumas limitações:
+- Classificação restrita a duas classes.
+- Dependência de imagens com boa iluminação e enquadramento.
+- Dataset relativamente limitado.
+
+Como trabalhos futuros, sugere-se:
+- Expansão para múltiplos níveis de qualidade.
+- Teste com outras arquiteturas (EfficientNet, ResNet).
+- Aplicação em ambiente industrial em tempo real.
+- Integração com sistemas embarcados ou edge computing.
+
+## 9. Conclusão
+
+Este trabalho demonstrou que técnicas modernas de Deep Learning, aliadas ao Transfer Learning, são capazes de fornecer soluções eficazes para problemas reais da indústria alimentícia. A organização modular do código, aliada à metodologia experimental rigorosa, torna o projeto reprodutível, extensível e adequado a contextos acadêmicos e profissionais.
+
+## Licença
+
+Este projeto é distribuído sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
